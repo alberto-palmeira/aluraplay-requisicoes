@@ -2,11 +2,24 @@ async function listaVideos () {
     const conexao = await fetch("http://localhost:3000/videos");
     const conexaoConvertida = await conexao.json();
 
+    if(!conexao.ok) {
+        let erro = new Error;
+        erro.status = conexao.status;
+        erro.mensagem = conexao.statusText;         
+        throw erro;
+    };
+
     return conexaoConvertida;
 };
 
 async function criaVideo (titulo, descricao, url, imagem) {
-    const conexao = await fetch('http://localhost:3000/video', {
+    if (url.includes('https://youtu.be/')) {
+        url.replace('https://youtu.be/', 'https://www.youtube.com/embed/');
+    };
+
+    console.log(url);
+    
+    const conexao = await fetch('http://localhost:3000/videos', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
