@@ -73,6 +73,12 @@ body {
     font-size: 21px;
 }
 
+.mensagem__texto {
+    color: lightcoral;
+    font-size: 18px;
+    font-weight: 500;
+}
+
 .pesquisar__input {
     width: 260px;
     height: 32px;

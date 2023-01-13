@@ -13,12 +13,6 @@ async function listaVideos () {
 };
 
 async function criaVideo (titulo, descricao, url, imagem) {
-    if (url.includes('https://youtu.be/')) {
-        url.replace('https://youtu.be/', 'https://www.youtube.com/embed/');
-    };
-
-    console.log(url);
-    
     const conexao = await fetch('http://localhost:3000/videos', {
         method: 'POST',
         headers: {
@@ -32,8 +26,12 @@ async function criaVideo (titulo, descricao, url, imagem) {
         })
     });
     
+    
     if(!conexao.ok) {
-        throw new Error('Não foi possível enviar o vídeo');
+        let erro = new Error;
+        erro.status = conexao.status;
+        erro.mensagem = conexao.statusText;         
+        throw erro;        
     };
 
     const conexaoConvertida = conexao.json();
