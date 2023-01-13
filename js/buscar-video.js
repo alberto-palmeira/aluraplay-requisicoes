@@ -10,7 +10,18 @@ const lista = document.querySelector('[data-lista]');
 botaoPesquisa.addEventListener('click', evento => {
     evento.preventDefault();
 
-    buscarVideo()});
+    buscarVideo();
+});
+
+dadosDePesquisa.addEventListener('keypress', evento => {
+    console.log(evento);
+    
+    if(evento.key === 'Enter') {
+        evento.preventDefault();
+
+        buscarVideo();
+    }
+})
 
 // ---------- Funções ----------
 
